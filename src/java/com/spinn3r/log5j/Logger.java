@@ -67,7 +67,7 @@ package com.spinn3r.log5j;
  */
 public class Logger extends AbstractLoggable {
 
-    public static boolean DEFAULT_ASYNC = Settings.get().isAsync();
+    public static final boolean DEFAULT_ASYNC = Settings.get().isAsync();
 
     private Logger(String logName, boolean async) {
         super(logName, async, LogManager.createInternalLogger(logName));

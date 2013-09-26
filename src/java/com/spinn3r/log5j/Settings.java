@@ -51,7 +51,7 @@ public class Settings {
         Settings settings = new Settings();
 
         settings.async = Boolean.parseBoolean(readSetting(prop,
-                "log5j.async", "async", "false"));
+                "log5j.async.default", "async.default", "false"));
         settings.factoryClass = readSetting(prop,
                 "log5j.factory", "factory", "com.spinn3r.log5j.factories.LogbackInternalLoggerFactory");
         settings.formatterFactoryClass = readSetting(prop,
