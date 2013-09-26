@@ -39,7 +39,7 @@ public class LogbackInternalLoggerFactory implements InternalLoggerFactory {
 
     static {
         levelMapping = new EnumMap<>(LogLevel.class);
-        levelMapping.put(LogLevel.TRACE, Level.DEBUG);
+        levelMapping.put(LogLevel.TRACE, Level.TRACE);
         levelMapping.put(LogLevel.DEBUG, Level.DEBUG);
         levelMapping.put(LogLevel.INFO, Level.INFO);
         levelMapping.put(LogLevel.WARN, Level.WARN);
@@ -83,7 +83,6 @@ public class LogbackInternalLoggerFactory implements InternalLoggerFactory {
 
     static class InternalLoggingEvent extends LoggingEvent {
         InternalLoggingEvent(String fqcn, Logger logger, Level level, String message, Throwable throwable,String threadName) {
-            // No args
             super(fqcn, logger, level, message, throwable, null); // Null argArray disables formatting.
             setThreadName(threadName);
         }

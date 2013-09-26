@@ -32,7 +32,7 @@ public class Log4jInternalLoggerFactory implements InternalLoggerFactory {
 
     static {
         __levelMapping = new EnumMap<LogLevel, Level>(LogLevel.class);
-        __levelMapping.put(LogLevel.TRACE, Level.DEBUG);
+        __levelMapping.put(LogLevel.TRACE, Level.TRACE);
         __levelMapping.put(LogLevel.DEBUG, Level.DEBUG);
         __levelMapping.put(LogLevel.INFO, Level.INFO);
         __levelMapping.put(LogLevel.WARN, Level.WARN);
