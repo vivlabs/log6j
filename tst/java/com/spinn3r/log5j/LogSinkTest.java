@@ -35,7 +35,7 @@ public class LogSinkTest {
     public void logger() throws Exception {
         BasicConfigurator.configure();
 
-        System.setProperty(LogManager.FACTORY_CLASS_NAME, "aa");
+        System.setProperty("log5j.factory", "aa");
 
         Logger logger = Logger.getLogger(false);
         Logger logger2 = Logger.getLogger("log2", false);

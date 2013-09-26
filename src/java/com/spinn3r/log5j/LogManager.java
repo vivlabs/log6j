@@ -20,9 +20,7 @@ import com.spinn3r.log5j.formatter.DefaultMessageFormatterFactory;
 import com.spinn3r.log5j.formatter.MessageFormatterFactory;
 
 public class LogManager {
-    public static final String FACTORY_CLASS_NAME = "log5j.factory";
 
-    public static final String FORMATTER_FACTORY_CLASS_NAME = "log5j.formatter.factory";
 
     private static final AsyncLogger __asyncLogger = new AsyncLogger();
 
@@ -36,9 +34,7 @@ public class LogManager {
     
     static {
         try {
-            String factory = System.getProperty(FACTORY_CLASS_NAME,
-                    "com.spinn3r.log5j.factories.Log4jInternalLoggerFactory");
-            Class<?> clazz = Class.forName(factory);
+            Class<?> clazz = Class.forName(Settings.get().getFactoryClass());
             __internalLoggerFactory = (InternalLoggerFactory) clazz.newInstance();
         } catch (Throwable e) {
             System.err.println("Cannot initialize internal logger factory:");
@@ -47,9 +43,7 @@ public class LogManager {
         }
 
         try {
-            String factory = System.getProperty(FORMATTER_FACTORY_CLASS_NAME,
-                    "com.spinn3r.log5j.formatter.DefaultMessageFormatterFactory");
-            Class<?> clazz = Class.forName(factory);
+            Class<?> clazz = Class.forName(Settings.get().getFormatterFactoryClass());
             __messageFormatterFactory = (MessageFormatterFactory) clazz.newInstance();
         } catch (Throwable e) {
             System.err.println("Cannot initialize message formatter factory:");
