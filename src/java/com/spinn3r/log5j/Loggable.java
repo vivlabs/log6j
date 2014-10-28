@@ -18,6 +18,9 @@ package com.spinn3r.log5j;
 public interface Loggable {
     String getName();
 
+
+    void trace(String formatMessage, Object... params);
+
     void debug(String formatMessage, Object... params);
 
     void info(String formatMessage, Object... params);
@@ -27,6 +30,9 @@ public interface Loggable {
     void error(String formatMessage, Object... params);
 
     void fatal(String formatMessage, Object... params);
+
+
+    void trace(String formatMessage, Throwable t, Object... params);
 
     void debug(String formatMessage, Throwable t, Object... params);
 
@@ -38,4 +44,16 @@ public interface Loggable {
 
     void fatal(String formatMessage, Throwable t, Object... params);
 
+
+    void trace(String formatMessage, Detail t, Object... params);
+
+    void debug(String formatMessage, Detail t, Object... params);
+
+    void info(String formatMessage, Detail t, Object... params);
+
+    void warn(String formatMessage, Detail t, Object... params);
+
+    void error(String formatMessage, Detail t, Object... params);
+
+    void fatal(String formatMessage, Detail t, Object... params);
 }

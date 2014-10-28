@@ -56,6 +56,17 @@ public abstract class AbstractLoggable implements Loggable {
         }
     }
 
+    public void trace(String formatMessage, Throwable t, Object... params) {
+        if (_logger.isEnabled(LogLevel.TRACE)) {
+            log(LogEvent.create(_logger, _logName, LogLevel.TRACE,
+                    formatMessage, params, t));
+        }
+    }
+
+    public void trace(String formatMessage, Detail d, Object... params) {
+        trace(formatMessage, new WrappedDetail(d), params);
+    }
+
     public void debug(String formatMessage, Object... params) {
         if (_logger.isEnabled(LogLevel.DEBUG)) {
             log(LogEvent.create(_logger, _logName, LogLevel.DEBUG,
@@ -70,6 +81,10 @@ public abstract class AbstractLoggable implements Loggable {
         }
     }
 
+    public void debug(String formatMessage, Detail d, Object... params) {
+        debug(formatMessage, new WrappedDetail(d), params);
+    }
+
     public void info(String formatMessage, Object... params) {
         if (_logger.isEnabled(LogLevel.INFO)) {
             log(LogEvent.create(_logger, _logName, LogLevel.INFO,
@@ -82,6 +97,10 @@ public abstract class AbstractLoggable implements Loggable {
             log(LogEvent.create(_logger, _logName, LogLevel.INFO,
                     formatMessage, params, t));
         }
+    }
+
+    public void info(String formatMessage, Detail d, Object... params) {
+        info(formatMessage, new WrappedDetail(d), params);
     }
 
     public void warn(String formatMessage, Object... params) {
@@ -103,6 +122,10 @@ public abstract class AbstractLoggable implements Loggable {
         }
     }
 
+    public void warn(String formatMessage, Detail d, Object... params) {
+        warn(formatMessage, new WrappedDetail(d), params);
+    }
+
     public void error(String formatMessage, Object... params) {
         if (_logger.isEnabled(LogLevel.ERROR)) {
             if (params != null && params.length > 0
@@ -122,6 +145,10 @@ public abstract class AbstractLoggable implements Loggable {
         }
     }
 
+    public void error(String formatMessage, Detail d, Object... params) {
+        error(formatMessage, new WrappedDetail(d), params);
+    }
+
     public void fatal(String formatMessage, Object... params) {
         if (_logger.isEnabled(LogLevel.FATAL)) {
             if (params != null && params.length > 0
@@ -139,6 +166,10 @@ public abstract class AbstractLoggable implements Loggable {
             log(LogEvent.create(_logger, _logName, LogLevel.FATAL,
                     formatMessage, params, t));
         }
+    }
+
+    public void fatal(String formatMessage, Detail d, Object... params) {
+        error(formatMessage, new WrappedDetail(d), params);
     }
 
     private static Object[] withoutFirst(Object... params) {

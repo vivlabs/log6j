@@ -32,6 +32,12 @@ public class LogSink implements Loggable {
         }
     }
 
+    public void trace(String formatMessage, Object... params) {
+        for (Loggable loggable : _loggables) {
+            loggable.trace(formatMessage, params);
+        }
+    }
+
     public void debug(String formatMessage, Object... params) {
         for (Loggable loggable : _loggables) {
             loggable.debug(formatMessage, params);
@@ -62,21 +68,9 @@ public class LogSink implements Loggable {
         }
     }
 
-    public void fatal(String formatMessage, Throwable t, Object... params) {
+    public void trace(String formatMessage, Throwable t, Object... params) {
         for (Loggable loggable : _loggables) {
-            loggable.fatal(formatMessage, t, params);
-        }
-    }
-
-    public void error(String formatMessage, Throwable t, Object... params) {
-        for (Loggable loggable : _loggables) {
-            loggable.error(formatMessage, t, params);
-        }
-    }
-
-    public void warn(String formatMessage, Throwable t, Object... params) {
-        for (Loggable loggable : _loggables) {
-            loggable.warn(formatMessage, t, params);
+            loggable.trace(formatMessage, t, params);
         }
     }
 
@@ -92,5 +86,45 @@ public class LogSink implements Loggable {
         }
     }
 
-    
+    public void warn(String formatMessage, Throwable t, Object... params) {
+        for (Loggable loggable : _loggables) {
+            loggable.warn(formatMessage, t, params);
+        }
+    }
+
+    public void error(String formatMessage, Throwable t, Object... params) {
+        for (Loggable loggable : _loggables) {
+            loggable.error(formatMessage, t, params);
+        }
+    }
+
+    public void fatal(String formatMessage, Throwable t, Object... params) {
+        for (Loggable loggable : _loggables) {
+            loggable.fatal(formatMessage, t, params);
+        }
+    }
+
+    public void trace(String formatMessage, Detail d, Object... params) {
+        trace(formatMessage, new WrappedDetail(d), params);
+    }
+
+    public void info(String formatMessage, Detail t, Object... params) {
+        info(formatMessage, new WrappedDetail(t), params);
+    }
+
+    public void debug(String formatMessage, Detail t, Object... params) {
+        debug(formatMessage, new WrappedDetail(t), params);
+    }
+
+    public void warn(String formatMessage, Detail t, Object... params) {
+        warn(formatMessage, new WrappedDetail(t), params);
+    }
+
+    public void error(String formatMessage, Detail t, Object... params) {
+        error(formatMessage, new WrappedDetail(t), params);
+    }
+
+    public void fatal(String formatMessage, Detail t, Object... params) {
+        fatal(formatMessage, new WrappedDetail(t), params);
+    }
 }

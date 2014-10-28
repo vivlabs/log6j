@@ -62,7 +62,7 @@ package com.spinn3r.log5j;
  * Now internally the log.debug message isn't even called and the string is
  * never expanded/formatted unless the debug level is enabled.
  * <p/>
- * The log is asynchronous by default, but factory methods (Logger.getLogger)
+ * The log is synchronous by default, but factory methods (Logger.getLogger) and {@link Settings}
  * support additional boolean parameter to control the behavior.
  */
 public class Logger extends AbstractLoggable {
