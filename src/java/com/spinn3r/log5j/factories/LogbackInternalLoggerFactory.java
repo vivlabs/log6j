@@ -25,11 +25,14 @@ import com.spinn3r.log5j.InternalLoggerFactory;
 import com.spinn3r.log5j.LogEvent;
 import com.spinn3r.log5j.LogLevel;
 import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
 
+import javax.annotation.Nullable;
 import java.util.EnumMap;
 
 /**
  * Internal logging implementation for Log5j that uses Logback (instead of log4j).
+ * Unlike the other simple implementations, it also supports slf4j Markers.
  * <p/>
  * Created by jlevy.
  * Date: 9/24/13
@@ -64,6 +67,7 @@ public class LogbackInternalLoggerFactory implements InternalLoggerFactory {
                 LoggingEvent loggingEvent = new InternalLoggingEvent(
                         LogbackInternalLoggerFactory.class.getName(),
                         logger,
+                        event.marker(),
                         toLogbackLevel(event.level()),
                         event.message(), // This formats the message.
                         t,
@@ -82,9 +86,10 @@ public class LogbackInternalLoggerFactory implements InternalLoggerFactory {
     }
 
     static class InternalLoggingEvent extends LoggingEvent {
-        InternalLoggingEvent(String fqcn, Logger logger, Level level, String message, Throwable throwable,String threadName) {
+        InternalLoggingEvent(String fqcn, Logger logger, @Nullable Marker marker, Level level, String message, Throwable throwable, String threadName) {
             super(fqcn, logger, level, message, throwable, null); // Null argArray disables formatting.
             setThreadName(threadName);
+            setMarker(marker);
         }
     }
 }

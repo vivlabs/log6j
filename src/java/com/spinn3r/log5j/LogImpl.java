@@ -34,84 +34,84 @@ public class LogImpl implements Log {
 
     public void t(String formatMessage, Object... formatParams) {
         if (enabled(LogLevel.TRACE)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.TRACE,
+            log(LogEvent.create(_logger, null, _logName, LogLevel.TRACE,
                     formatMessage, formatParams));
         }
     }
 
     public void t(Throwable t, String formatMessage, Object... formatParams) {
         if (enabled(LogLevel.TRACE)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.TRACE,
+            log(LogEvent.create(_logger, null, _logName, LogLevel.TRACE,
                     formatMessage, formatParams, t));
         }
     }
 
     public void d(String formatMessage, Object... formatParams) {
         if (enabled(LogLevel.DEBUG)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.DEBUG,
+            log(LogEvent.create(_logger, null, _logName, LogLevel.DEBUG,
                     formatMessage, formatParams));
         }
     }
 
     public void d(Throwable t, String formatMessage, Object... formatParams) {
         if (enabled(LogLevel.DEBUG)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.DEBUG,
+            log(LogEvent.create(_logger, null, _logName, LogLevel.DEBUG,
                     formatMessage, formatParams, t));
         }
     }
 
     public void i(String formatMessage, Object... formatParams) {
         if (enabled(LogLevel.INFO)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.INFO,
+            log(LogEvent.create(_logger, null, _logName, LogLevel.INFO,
                     formatMessage, formatParams));
         }
     }
 
     public void i(Throwable t, String formatMessage, Object... formatParams) {
         if (enabled(LogLevel.INFO)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.INFO,
+            log(LogEvent.create(_logger, null, _logName, LogLevel.INFO,
                     formatMessage, formatParams, t));
         }
     }
 
     public void w(String formatMessage, Object... formatParams) {
         if (enabled(LogLevel.WARN)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.WARN,
+            log(LogEvent.create(_logger, null, _logName, LogLevel.WARN,
                     formatMessage, formatParams));
         }
     }
 
     public void w(Throwable t, String formatMessage, Object... formatParams) {
         if (enabled(LogLevel.WARN)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.WARN,
+            log(LogEvent.create(_logger, null, _logName, LogLevel.WARN,
                     formatMessage, formatParams, t));
         }
     }
 
     public void e(String formatMessage, Object... formatParams) {
         if (enabled(LogLevel.ERROR)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.ERROR,
+            log(LogEvent.create(_logger, null, _logName, LogLevel.ERROR,
                     formatMessage, formatParams));
         }
     }
 
     public void e(Throwable t, String formatMessage, Object... formatParams) {
         if (enabled(LogLevel.ERROR)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.ERROR,
+            log(LogEvent.create(_logger, null, _logName, LogLevel.ERROR,
                     formatMessage, formatParams, t));
         }
     }
 
     public void f(String formatMessage, Object... formatParams) {
         if (enabled(LogLevel.FATAL)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.FATAL,
+            log(LogEvent.create(_logger, null, _logName, LogLevel.FATAL,
                     formatMessage, formatParams));
         }
     }
 
     public void f(Throwable t, String formatMessage, Object... formatParams) {
         if (enabled(LogLevel.FATAL)) {
-            log(LogEvent.create(_logger, _logName, LogLevel.FATAL,
+            log(LogEvent.create(_logger, null, _logName, LogLevel.FATAL,
                     formatMessage, formatParams, t));
         }
     }

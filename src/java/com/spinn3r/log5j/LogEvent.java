@@ -16,7 +16,9 @@
 package com.spinn3r.log5j;
 
 import com.spinn3r.log5j.formatter.MessageFormatter;
+import org.slf4j.Marker;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 
 public class LogEvent {
@@ -32,6 +34,8 @@ public class LogEvent {
 
     private final long _time;
 
+    private final Marker _marker;
+
     private final String _threadName;
 
     private final String _logName;
@@ -46,12 +50,14 @@ public class LogEvent {
 
     private LogEvent(String threadName,
                      InternalLogger internalLogger,
+                     @Nullable Marker marker,
                      String logName,
                      LogLevel level,
                      String formatMessage,
                      Object[] params,
                      Throwable throwable) {
         _time = System.currentTimeMillis();
+        _marker = marker;
         _threadName = threadName;
         _internalLogger = internalLogger;
         _logName = logName;
@@ -71,6 +77,10 @@ public class LogEvent {
 
     protected InternalLogger logger() {
         return _internalLogger;
+    }
+
+    public Marker marker() {
+        return _marker;
     }
 
     public String logName() {
@@ -105,6 +115,7 @@ public class LogEvent {
     public String toString() {
         return "LogEvent{" +
                 "time=" + _time +
+                ", marker='" + _marker + '\'' +
                 ", threadName='" + _threadName + '\'' +
                 ", level=" + _level +
                 ", formatMessage='" + _formatMessage + '\'' +
@@ -113,37 +124,38 @@ public class LogEvent {
                 '}';
     }
 
-    public static LogEvent create(InternalLogger internalLogger, String logName,
+    public static LogEvent create(InternalLogger internalLogger, @Nullable Marker marker, String logName,
             LogLevel level, String message) {
-        return create(internalLogger, logName, level, message, null, null);
+        return create(internalLogger, marker, logName, level, message, null, null);
     }
 
-    public static LogEvent create(InternalLogger internalLogger, String logName,
+    public static LogEvent create(InternalLogger internalLogger, @Nullable Marker marker, String logName,
             LogLevel level, String message, Throwable throwable) {
-        return create(internalLogger, logName, level, message, null, throwable);
+        return create(internalLogger, marker, logName, level, message, null, throwable);
     }
 
-    public static LogEvent create(InternalLogger internalLogger, String logName,
+    public static LogEvent create(InternalLogger internalLogger, @Nullable Marker marker, String logName,
             LogLevel level, String message, Object[] params) {
-        return create(internalLogger, logName, level, message, params, null);
+        return create(internalLogger, marker, logName, level, message, params, null);
     }
 
-    public static LogEvent create(InternalLogger internalLogger, String logName,
+    public static LogEvent create(InternalLogger internalLogger, @Nullable Marker marker, String logName,
             LogLevel level, String message, Object[] params, Throwable throwable) {
         String threadName = Thread.currentThread().getName();
-        return create(threadName, internalLogger, logName, level, message,
+        return create(threadName, internalLogger, marker, logName, level, message,
                 params, throwable);
     }
 
     public static LogEvent create(
             String threadName,
             InternalLogger internalLogger,
+            @Nullable Marker marker,
             String logName,
             LogLevel level,
             String formatMessage,
             Object[] params,
             Throwable throwable) {
-        return new LogEvent(threadName, internalLogger, logName, level,
+        return new LogEvent(threadName, internalLogger, marker, logName, level,
                 formatMessage, params, throwable);
     }
 }
