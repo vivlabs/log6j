@@ -16,18 +16,24 @@
 
 package com.spinn3r.log5j;
 
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 /**
  * Read log5j settings from properties file, with optional overrides from the system properties.
+ * See {@link Setting} for available settings.
  * <p/>
  * Created by jlevy.
  * Date: 9/25/13
  */
 public class Settings {
+
     public static final String SETTINGS_FILE = "log5j.properties";
+    public static final String PROPERTY_PREFIX = "log5j.";
 
     public static Settings get() {
         return Singleton.INSTANCE;
@@ -39,7 +45,7 @@ public class Settings {
 
     private static Settings readSettings() {
         Properties prop = new Properties();
-        try (InputStream in = Settings.class.getResourceAsStream(SETTINGS_FILE)) {
+        try (InputStream in = ClassLoader.getSystemResourceAsStream(SETTINGS_FILE)) {
             prop.load(in);
         } catch (RuntimeException | IOException ignored) {
         }
@@ -50,29 +56,23 @@ public class Settings {
     private static Settings fromProperties(Properties prop) {
         Settings settings = new Settings();
 
-        settings.async = Boolean.parseBoolean(readSetting(prop,
-                "log5j.async.default", "async.default", "false"));
-        settings.factoryClass = readSetting(prop,
-                "log5j.factory", "factory", "com.spinn3r.log5j.factories.LogbackInternalLoggerFactory");
-        settings.formatterFactoryClass = readSetting(prop,
-                "log5j.formatter.factory", "formatter.factory", "com.spinn3r.log5j.formatter.DefaultMessageFormatterFactory");
+        settings.async = Boolean.parseBoolean(Setting.ASYNC_DEFAULT.readFrom(prop));
+        settings.factoryClass = Setting.FACTORY_CLASS.readFrom(prop);
+        settings.formatterFactoryClass = Setting.FORMATTER_FACTORY_CLASS.readFrom(prop);
+
+        String markerString = Setting.MARKER_DEFAULT.readFrom(prop);
+        settings.defaultMarker = markerString == null ? null : MarkerFactory.getMarker(markerString);
 
         return settings;
     }
 
-    private static String readSetting(Properties prop, String sysPropName, String propName, String defaultValue) {
-        String value = System.getProperty(sysPropName);
-        if (value == null) {
-            value = prop.getProperty(propName, defaultValue);
-        }
-        return value;
+    private Settings() {
     }
-
-    private Settings() {}
 
     private boolean async;
     private String factoryClass;
     private String formatterFactoryClass;
+    private Marker defaultMarker;
 
     public boolean isAsync() {
         return async;
@@ -86,12 +86,17 @@ public class Settings {
         return formatterFactoryClass;
     }
 
+    public Marker getDefaultMarker() {
+        return defaultMarker;
+    }
+
     @Override
     public String toString() {
         return "Settings{" +
                 "async=" + async +
                 ", factoryClass='" + factoryClass + '\'' +
                 ", formatterFactoryClass='" + formatterFactoryClass + '\'' +
+                ", defaultMarker='" + defaultMarker + '\'' +
                 '}';
     }
 }

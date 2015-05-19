@@ -20,10 +20,7 @@ import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.spi.LoggingEvent;
-import com.spinn3r.log5j.InternalLogger;
-import com.spinn3r.log5j.InternalLoggerFactory;
-import com.spinn3r.log5j.LogEvent;
-import com.spinn3r.log5j.LogLevel;
+import com.spinn3r.log5j.*;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 
@@ -89,7 +86,7 @@ public class LogbackInternalLoggerFactory implements InternalLoggerFactory {
         InternalLoggingEvent(String fqcn, Logger logger, @Nullable Marker marker, Level level, String message, Throwable throwable, String threadName) {
             super(fqcn, logger, level, message, throwable, null); // Null argArray disables formatting.
             setThreadName(threadName);
-            setMarker(marker);
+            setMarker(marker != null ? marker : Settings.get().getDefaultMarker());
         }
     }
 }
