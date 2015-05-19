@@ -28,7 +28,12 @@ public enum Setting {
     /**
      * Default {@link org.slf4j.Marker} name to use if no marker provided.
      */
-    MARKER_DEFAULT("marker.default", null);
+    MARKER_DEFAULT("marker.default", null),
+
+    /**
+     * Maximum size, in bytes, of a {@link Detail} log message.
+     */
+    DETAIL_MAX("detail.max", String.valueOf(Integer.MAX_VALUE));
 
     private final String name;
     private final String defaultValue;

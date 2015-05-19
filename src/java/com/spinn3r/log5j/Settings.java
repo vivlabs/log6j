@@ -59,9 +59,9 @@ public class Settings {
         settings.async = Boolean.parseBoolean(Setting.ASYNC_DEFAULT.readFrom(prop));
         settings.factoryClass = Setting.FACTORY_CLASS.readFrom(prop);
         settings.formatterFactoryClass = Setting.FORMATTER_FACTORY_CLASS.readFrom(prop);
-
         String markerString = Setting.MARKER_DEFAULT.readFrom(prop);
         settings.defaultMarker = markerString == null ? null : MarkerFactory.getMarker(markerString);
+        settings.detailMax = Integer.valueOf(Setting.DETAIL_MAX.readFrom(prop));
 
         return settings;
     }
@@ -73,6 +73,7 @@ public class Settings {
     private String factoryClass;
     private String formatterFactoryClass;
     private Marker defaultMarker;
+    private int detailMax;
 
     public boolean isAsync() {
         return async;
@@ -88,6 +89,10 @@ public class Settings {
 
     public Marker getDefaultMarker() {
         return defaultMarker;
+    }
+
+    public int getDetailMax() {
+        return detailMax;
     }
 
     @Override
