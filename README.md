@@ -1,7 +1,7 @@
 alt-log5j
 =========
 
-Github fork of Spinn3r's Log5j with a few small modifications
+Github fork of Spinn3r's Log5j with a number of improvements.
 
 Based on: https://bitbucket.org/burtonator/log5j/wiki/Home
 
@@ -17,7 +17,8 @@ needed features:
 
 - Support for Logback. Log5j by default uses Log4j, but it's impossible to use
   some libraries with just Log4j nowadays (and no, log4j-over-slf4j isn't ideal
-  either, for a few reasons)
+  either, for a few reasons).
+
 - Support for an optional, arbitrary "detail" objects on log events. A detail
   is an arbitrary object attached to any log event that implements the `Detail`
   marker interface. For compatibility with Logback or other log systems, the
@@ -28,6 +29,11 @@ needed features:
   can be logged without any serialization into a usual log string, and then
   accessed directly (e.g. by a custom appender that writes to a database or
   streams the object to a browser-based viewer).
+
+- Support for SLF4J Markers. These allow any log message to be categorized or
+  "marked", allowing new ways to slice and dice logs without relying on severity
+  or logger name (Java class).
+
 - More configuration support, including file-based configuration
 
 This fork is just a modification of Log5j to support a few such fixes.
