@@ -44,6 +44,8 @@ But it was missing some needed features. Log6j has these additions over Log5j:
 - **Configurability**: More configuration support, including whether the system
   uses sync or async logging and a maximum allowed size for writing Detail objects.
 
+- Minor bugfixes.
+
 ## Using it
 
 Note this is a direct fork of Log5j. It uses the same old Log5j package
