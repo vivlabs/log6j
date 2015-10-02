@@ -3,7 +3,7 @@ Log6j
 
 Log6j is a fork of Spinn3r's Log5j with a number of improvements.
 
-Based on: https://bitbucket.org/burtonator/log5j/wiki/Home
+Based on: https://bitbucket.org/burtonator/log5j/wiki/Home and https://code.google.com/p/log5j/
 
 ## Rationale and features
 
@@ -59,4 +59,6 @@ this is not published as a maven artifact.)
 Many thanks to [Kevin Burton](https://bitbucket.org/burtonator) for the 
 original work.
 
+## License
 
+Apache 2
