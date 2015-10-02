@@ -24,7 +24,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 /**
- * Read log5j settings from properties file, with optional overrides from the system properties.
+ * Read Log6j settings from a properties file, with optional overrides from the system properties.
  * See {@link Setting} for available settings.
  * <p/>
  * Created by jlevy.
@@ -32,8 +32,8 @@ import java.util.Properties;
  */
 public class Settings {
 
-    public static final String SETTINGS_FILE = "log5j.properties";
-    public static final String PROPERTY_PREFIX = "log5j.";
+    public static final String SETTINGS_FILE = "log6j.properties";
+    public static final String PROPERTY_PREFIX = "log6j.";
 
     public static Settings get() {
         return Singleton.INSTANCE;
