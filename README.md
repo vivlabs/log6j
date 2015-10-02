@@ -8,8 +8,8 @@ Based on: https://bitbucket.org/burtonator/log5j/wiki/Home and https://code.goog
 ## Rationale and features
 
 First, an apology. Java logging is a morass of competing and incompatible
-frameworks accumulated over decades. I'm so sorry to add yet another variation
-to this sadly complex world.
+frameworks accumulated over decades. I'm [so sorry](http://xkcd.com/927/)
+to add yet another variation to this sadly complex world.
 
 Log5j's APIs are actually a lot nicer to use than the more popular
 SLF4J APIs. For example, it has printf-style formatting, which is much more handy
